@@ -4,9 +4,7 @@
 import { createStore } from 'redux';
 import reducers from './reducers/rootReducers';
 
-const store = createStore(
+export const store = createStore(
     reducers,
     {}
 );
-
-export default store;

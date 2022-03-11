@@ -11,7 +11,8 @@ const reducer = (state = 0, action) => {
             return state - action.payload;
 
         default:
-            throw new Error('Invalid Action');
+            // throw new Error('Invalid Action');
+            return state;
     }
 };
 
