@@ -4,10 +4,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/rootReducers';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Thunk is a miidleware which allows redux dealing with async functions
 export const store = createStore(
     reducers,
     {},
-    applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk))
 );
