@@ -18,19 +18,31 @@ const App = () => {
 
   return (
     <div className='App'>
+      <div style={{ width: "300px", margin: "10px auto", padding: "5px", border: "2px solid black" }}>
+        User requirements
+        <p>Current user is <strong>{usersState.role}</strong> and {usersState.age > 17 ? <strong>is</strong> : <strong>is not</strong>} an adult</p>
+        <input type="checkbox" id="toggleRole" onClick={() => dispatch(usersCreators.toogleRole())} />
+        <label htmlFor="toggleRole">Admin</label> <br />
+        <label htmlFor="age">User age: </label>
+        <input id="age" onChange={(evt) => setAge(parseInt(evt.target.value))} style={{ margin: "auto 5px", width: "50px" }} />
+        <button onClick={() => dispatch(usersCreators.setAge(age))}>Set Age</button>
+      </div>
+
       <div>
-        <p>Store state is: {accountState} </p>
-        <button onClick={() => dispatch(accountCreators.depositMoney(10))}>Deposit</button>
-        <button onClick={() => dispatch(accountCreators.withdrawMoney(10))}>Withdraw</button>
+        {
+          usersState.role === 'admin' && usersState.age > 17 ?
+            <div>
+              <p>Store state is: {accountState} </p>
+              <button onClick={() => dispatch(accountCreators.depositMoney(10))}>Deposit</button>
+              <button onClick={() => dispatch(accountCreators.withdrawMoney(10))}>Withdraw</button>
+            </div>
+            : usersState.role === 'admin' ?
+              <p>Store state is: {accountState} </p>
+              : <p>You cannot see the account</p>
+        }
       </div>
       <div>
-        <p>User role is: {usersState.role} </p>
-        <input type="checkbox" id="toggleRole" onClick={() => dispatch(usersCreators.toogleRole())} />
-        <label htmlFor="toggleRole">Set Admin</label>
-        <p>User age is: {usersState.age} </p>
-        <label htmlFor="age">User age</label>
-        <input id="age" onChange={(evt) => setAge(parseInt(evt.target.value))} /> <br />
-        <button onClick={() => dispatch(usersCreators.setAge(age))}>Set Age</button>
+
       </div>
     </div>
   );
